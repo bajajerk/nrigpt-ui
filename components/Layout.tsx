@@ -39,7 +39,7 @@ export default function Layout({ children, meta: pageMeta }: Props) {
         <meta name="twitter:image" content={meta.cardImage} />
       </Head>
       <main id="skip">{children}</main>
-      <Footer />
+      {/*<Footer />*/}
     </>
   );
 }

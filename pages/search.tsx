@@ -23,15 +23,15 @@ export default function Search() {
       // fetchAIPageReference()
     }
   }, [queryString])
-
-  const fetchAIPageReference = async () => {
-    setPageReference(null)
-    const { data } = await axios.post('https://www.goinri.com/api/get-blog-page', {
-      query: queryString
-    })
-    setPageReference(data?.pageLink)
-    setPageLinks(data?.allPageLinksFound || [])
-  }
+  //
+  // const fetchAIPageReference = async () => {
+  //   setPageReference(null)
+  //   const { data } = await axios.post('https://www.goinri.com/api/get-blog-page', {
+  //     query: queryString
+  //   })
+  //   setPageReference(data?.pageLink)
+  //   setPageLinks(data?.allPageLinksFound || [])
+  // }
 
   const fetchDataCallBAck = async () => {
     setGptLoading(true)
@@ -49,7 +49,7 @@ export default function Search() {
     let result = ''
     let done = false
 
-    while (!done && reader)
+    while (!done && reader){
       const { value, done: readerDone } = await reader.read()
       done = readerDone
       const chunk = new TextDecoder().decode(value)

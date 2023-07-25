@@ -36,7 +36,7 @@ export default function Search() {
   const fetchDataCallBAck = async () => {
     setGptLoading(true)
     setAiResponse('')
-    setPageReference(null)
+    // setPageReference(null)
     const response2 = await fetch('https://staging.goinri.com/api/gpt-search', {
       method: 'POST',
       body: JSON.stringify({ query: queryString}),
@@ -45,11 +45,11 @@ export default function Search() {
       throw new Error('SSE request failed')
     }
 
-    const reader = response2.body.getReader()
+    const reader = response2?.body?.getReader() || null
     let result = ''
     let done = false
 
-    while (!done) {
+    while (!done && reader)
       const { value, done: readerDone } = await reader.read()
       done = readerDone
       const chunk = new TextDecoder().decode(value)

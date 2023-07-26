@@ -7,6 +7,7 @@ import { PageMeta } from '../utils/types'
 import  GPTIcon  from '../images/chatgpt-icon.svg';
 import  Avatar  from '../images/avatar.png';
 import { Message } from '../types/message'
+import { isBrowser } from 'react-device-detect';
 
 interface Props {
   message: Message;
@@ -108,9 +109,11 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
         </div>
 
         <div className="flex gap-x-4 pr-6 w-full py-4 items-center md:justify-center px-16">
-          <img className="h-12 w-12 flex-none rounded-full bg-gray-50"
-               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-               alt="" />
+          {isBrowser &&
+            <img className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                 alt="" />
+          }
           <div className="min-w-0 flex  items-center">
             <p className="text-base leading-7 text-gray-600">
               {aiResponse === '' ? 'Thinking...' : aiResponse}

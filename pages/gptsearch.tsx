@@ -58,7 +58,7 @@ const ChatPage = () => {
               type="button"
               className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
             >
-              <SparkIcon />
+              <SparkIcon id={undefined} color={undefined} />
             </button>
           </span>
           <input

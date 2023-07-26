@@ -84,14 +84,20 @@ const GptSearchBanner = () => {
             className='w-4 h-4 md:w-6 md:h-6'
           />
           <div className='ml-3 mt-3 mr-2 text-white font-xs'>Let's try</div>
-          <div onClick={() => setSearchQuery('Taxation')}>
+          <div onClick={() =>
+            router.push(`/gptsearch?q=Invest in India`)
+          }>
             <Chip text={'Invest in India'} />
           </div>
-          <div onClick={() => setSearchQuery('Mutual Funds')}>
+          <div onClick={() => {
+            router.push(`/gptsearch?q=NRI Taxation`)
+          }}>
             <Chip text={'NRI Taxation'} />
           </div>
 
-          <div onClick={() => setSearchQuery('ITR')}>
+          <div onClick={() => {
+            router.push(`/gptsearch?q=Best Index Funds`)
+          }}>
             <Chip text={'Best Index Funds'} />
           </div>
         </div>

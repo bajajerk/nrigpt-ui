@@ -66,8 +66,8 @@ const GptSearchBanner = () => {
           <input
             type='search'
             id='default-search'
-            className='font-sm md:font-lg block w-full md:w-1/2 p-2 md:p-4 pl-10 md:pl-8 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-0'
-            placeholder='Search Taxation, Logos...'
+            className='font-sm md:font-lg block w-full md:w-1/2 p-2 md:p-4 pl-10 md:pl-8 text-lg text-gray-800 border border-gray-300 rounded-lg bg-gray-50 focus:ring-0'
+            placeholder='Search for your queries'
             value={searchQuery}
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
@@ -83,16 +83,16 @@ const GptSearchBanner = () => {
             src='https://www.zomato.com/trends/static/media/cureved-arrow.757c85f6438809992c111fc9818cc331.svg'
             className='w-4 h-4 md:w-6 md:h-6'
           />
-          <div className='ml-3 mt-3 mr-2 text-white font-xs'>Let's Try</div>
+          <div className='ml-3 mt-3 mr-2 text-white font-xs'>Let's try</div>
           <div onClick={() => setSearchQuery('Taxation')}>
-            <Chip text={'Taxation'} />
+            <Chip text={'Invest in India'} />
           </div>
           <div onClick={() => setSearchQuery('Mutual Funds')}>
-            <Chip text={'Mutual Funds'} />
+            <Chip text={'NRI Taxation'} />
           </div>
 
           <div onClick={() => setSearchQuery('ITR')}>
-            <Chip text={'ITR'} />
+            <Chip text={'Best Index Funds'} />
           </div>
         </div>
       </form>

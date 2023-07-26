@@ -5,6 +5,7 @@ import teaserGif from '../images/teaser.gif'
 import Image from 'next/image'
 import { PageMeta } from '../utils/types'
 import  GPTIcon  from '../images/chatgpt-icon.svg';
+import  Avatar  from '../images/avatar.png';
 
 interface Props {
   queryString: string;
@@ -19,7 +20,7 @@ export default function Gptchat({ queryString }: Props) {
 
   useEffect(() => {
     if (queryString) {
-      // fetchDataCallBAck()
+      fetchDataCallBAck()
       // fetchAIPageReference()
     }
   }, [queryString])
@@ -79,10 +80,12 @@ export default function Gptchat({ queryString }: Props) {
 
   // @ts-ignore
   return (
-      <li key={queryString} className="relative flex   flex-col px-16">
-        <div className="flex gap-x-4 w-full bg-gray-50 py-4 items-center">
-          <img className="h-12 w-12 flex-none rounded-full bg-gray-50"
-               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+      <li key={queryString} className="relative flex  flex-col ">
+        <div className="flex gap-x-4 w-full bg-gray-50 py-4 items-center md:justify-center px-16">
+          <Image className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                 height={48}
+                 width={48}
+               src={Avatar}
                alt="" />
           <div className="min-w-0 flex  items-center">
             <p className="text-sm font-semibold leading-6 text-gray-900">
@@ -91,7 +94,7 @@ export default function Gptchat({ queryString }: Props) {
           </div>
         </div>
 
-        <div className="flex gap-x-4 pr-6 w-full py-4 items-center">
+        <div className="flex gap-x-4 pr-6 w-full py-4 items-center md:justify-center px-16">
           <img className="h-12 w-12 flex-none rounded-full bg-gray-50"
                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                alt="" />

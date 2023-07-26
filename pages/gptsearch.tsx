@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Gptchat from '../components/gptchat'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SparkIcon } from "../images/SparkIcon";
+import { useRouter } from 'next/router'
 
 interface Message {
   queryString: string
@@ -10,6 +11,18 @@ interface Message {
 const ChatPage = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [message, setMessage] = useState('')
+
+  const router = useRouter();
+  const { query } = router;
+
+  const queryString = query.q;
+
+  useEffect(() => {
+    if(queryString && queryString.length > 0) {
+      // @ts-ignore
+      setMessages([{ queryString: queryString }])
+    }
+  }, [queryString])
   return (
     <div className='flex flex flex-col h-screen'>
       <header className="bg-blue-600">
@@ -56,6 +69,12 @@ const ChatPage = () => {
             placeholder='Write your message!'
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={(e) => {
+              if(e.key === 'Enter') {
+                e.preventDefault()
+                setMessages([...messages, { queryString: message }])
+                setMessage('')              }
+            }}
             className='w-full focus:outline-none focus:placeholder-white text-gray-600 placeholder-gray-600 pl-12 bg-white rounded-md py-3'
           />
           <div className='absolute right-0 items-center inset-y-0 hidden sm:flex'>
@@ -66,7 +85,7 @@ const ChatPage = () => {
                 setMessages([...messages, { queryString: message }])
                 setMessage('')
               }}
-              className='inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none'
+              className='inline-flex items-center justify-center rounded-lg px-4 py-3 my-2 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none'
             >
               <span className='font-bold'>Send</span>
               <svg

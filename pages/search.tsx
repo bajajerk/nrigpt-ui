@@ -24,7 +24,7 @@ export default function Search() {
     }
   }, [queryString])
   //
-  // const fetchAIPageReference = async () => {
+  // const faetchAIPageReference = async () => {
   //   setPageReference(null)
   //   const { data } = await axios.post('https://www.goinri.com/api/get-blog-page', {
   //     query: queryString

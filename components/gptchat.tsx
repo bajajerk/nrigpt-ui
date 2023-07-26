@@ -4,6 +4,7 @@ import {useRouter} from "next/router";
 import teaserGif from '../images/teaser.gif'
 import Image from 'next/image'
 import { PageMeta } from '../utils/types'
+import  GPTIcon  from '../images/chatgpt-icon.svg';
 
 interface Props {
   queryString: string;
@@ -18,7 +19,7 @@ export default function Gptchat({ queryString }: Props) {
 
   useEffect(() => {
     if (queryString) {
-      fetchDataCallBAck()
+      // fetchDataCallBAck()
       // fetchAIPageReference()
     }
   }, [queryString])
@@ -78,14 +79,31 @@ export default function Gptchat({ queryString }: Props) {
 
   // @ts-ignore
   return (
-    <>
-      <p>
-        {queryString}
-      </p>
-      <p>
-        {aiResponse}
-      </p>
-    </>
+      <li key={queryString} className="relative flex   flex-col px-16">
+        <div className="flex gap-x-4 w-full bg-gray-50 py-4 items-center">
+          <img className="h-12 w-12 flex-none rounded-full bg-gray-50"
+               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+               alt="" />
+          <div className="min-w-0 flex  items-center">
+            <p className="text-sm font-semibold leading-6 text-gray-900">
+                {queryString}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex gap-x-4 pr-6 w-full py-4 items-center">
+          <img className="h-12 w-12 flex-none rounded-full bg-gray-50"
+               src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+               alt="" />
+          <div className="min-w-0 flex  items-center">
+            <p className="text-base leading-7 text-gray-600">
+              {aiResponse === '' ? 'Thinking...' : aiResponse}
+            </p>
+          </div>
+        </div>
+
+
+      </li>
   );
 }
 

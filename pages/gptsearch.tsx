@@ -11,12 +11,11 @@ interface Message {
 const ChatPage = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [message, setMessage] = useState('')
+  const messageEnd = useRef<HTMLDivElement>(null)
 
   const router = useRouter()
   const { query } = router
 
-  const dummyRef = useRef(null)
-  const listRef = useRef(null)
   const queryString = query.q
 
   useEffect(() => {
@@ -25,39 +24,38 @@ const ChatPage = () => {
       setMessages([{ queryString: queryString }])
     }
     // @ts-ignore
-    dummyRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }, [queryString])
+
+  //after every 1 second scroll to bottom
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // @ts-ignore
+      messageEnd?.current?.scrollIntoView({ behavior: 'smooth' })
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <>
-      <div className="flex flex-col overflow-hidden">
-        <div>
-          <header className="bg-blue-600">
-            <nav
-              className="mx-auto flex  items-center justify-between p-6 lg:px-8"
-              aria-label="Global"
-            >
-              <div className="flex lg:flex-1">
-                {/*<a href="#" className="-m-1.5 p-1.5">*/}
-                {/*  <span className="sr-only">Your Company</span>*/}
-                {/*  <img className="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="" />*/}
-                {/*</a>*/}
-                <p className={'text-white pl-2 text-lg font-semibold'}>NRI GPT</p>
-              </div>
-            </nav>
-          </header>
-        </div>
-        <div className="overflow-scroll" style={{ height: '80vh' }}>
-          <ul
-            ref={listRef}
-            role="list"
-            className="divide-y divide-gray-100 flex justify-start flex-col"
+      <div className="flex flex-col h-screen overflow-hidden">
+        <header className="bg-blue-600">
+          <nav
+            className="mx-auto flex  items-center justify-between p-6 lg:px-8"
+            aria-label="Global"
           >
+            <div className="flex lg:flex-1">
+              <p className={'text-white pl-2 text-lg font-semibold'}>NRI GPT</p>
+            </div>
+          </nav>
+        </header>
+        <div className="flex-1 overflow-scroll">
+          <ul role="list" className="divide-y divide-gray-100 flex justify-start flex-col">
             {messages.map((message, i) => (
               <Gptchat key={i} queryString={message.queryString} />
             ))}
           </ul>
-          <div ref={dummyRef} />
+          <div className="mt-20" />
+          <div ref={messageEnd} />
         </div>
       </div>
       <div className="sticky  bottom-0">
@@ -83,11 +81,10 @@ const ChatPage = () => {
                   setMessage('')
                   //make dummy ref scroll into view
                   // @ts-ignore
-                  dummyRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
                   //make list ref scroll into view
+                  messageEnd?.current?.scrollIntoView({ behavior: 'smooth' })
 
                   // @ts-ignore
-                  listRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
                 }
               }}
               className="w-full focus:outline-none focus:placeholder-white text-gray-600 placeholder-gray-600 pl-12 bg-white rounded-md py-3"

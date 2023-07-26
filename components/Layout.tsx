@@ -13,8 +13,8 @@ interface Props {
 export default function Layout({ children, meta: pageMeta }: Props) {
   const router = useRouter();
   const meta = {
-    title: 'Inri',
-    description: 'Investment platform for NRIs',
+    title: 'NRI GPT ',
+    description: 'Get your India investing, taxation queries and more answered using Open AI ChatGPT',
     cardImage: '/og.png',
     ...pageMeta
   };

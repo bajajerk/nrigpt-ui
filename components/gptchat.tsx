@@ -10,6 +10,7 @@ import  Inri  from '../images/inri.png';
 
 import { Message } from '../types/message'
 import { isBrowser } from 'react-device-detect';
+import Mixpanel from 'mixpanel-browser'
 
 interface Props {
   message: Message;
@@ -47,6 +48,9 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
     const response2 = await fetch('https://staging.goinri.com/api/gpt-search', {
       method: 'POST',
       body: JSON.stringify({ query: message.queryString}),
+    })
+    Mixpanel.track('gpt_search_api', {
+      queryString: message.queryString
     })
     if (!response2.ok) {
       throw new Error('SSE request failed')

@@ -1,10 +1,14 @@
 import type { NextPage } from 'next'
 import GptSearchBanner from '../components/GPTSearchBanner'
 import Footer from '../components/Footer'
-import React from 'react'
+import React, { useEffect } from 'react'
+import Mixpanel from 'mixpanel-browser'
 
 const Home: NextPage = () => {
 
+  useEffect(() => {
+    Mixpanel.track('home_page', {})
+  }, [])
   return (
     <main className='flex bg-white flex-col items-center justify-between'>
       <GptSearchBanner />

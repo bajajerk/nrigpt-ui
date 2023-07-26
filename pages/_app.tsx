@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import {  Session } from '@supabase/auth-helpers-react'
 import Layout from '../components/Layout'
+import { Analytics } from '@vercel/analytics/react';
 
 function MyApp({
   Component,
@@ -14,6 +15,7 @@ function MyApp({
     <div className="bg-white">
         <Layout>
           <Component {...pageProps} />
+          <Analytics />
         </Layout>
     </div>
   )

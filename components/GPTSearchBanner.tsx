@@ -1,6 +1,7 @@
 import React from 'react'
 import ZomatoImage from '../assets/zomato.svg'
 import { useRouter } from 'next/router'
+import Logo from './logo'
 //
 const GptSearchBanner = () => {
   const router = useRouter()
@@ -33,8 +34,13 @@ const GptSearchBanner = () => {
     >
       <div className=' mt-8 md:mt-20 flex flex-col items-center'>
         <h1 className='text-white text-3xl md:text-5xl font-bold'>NRI GPT</h1>
-        <div className='text-white text-lg md:text-2xl font-light mt-3 mb-4 lg:mt-6 lg:mb-8'>
-          Ask whatever you want to ask
+        <div className='mt-3 mb-4 lg:mt-6 lg:mb-8 flex flex-row'>
+          <div className={'flex text-white text-md md:text-lg font-light items-center mr-2'}>
+            Brought to you by
+          </div>
+          <a href={'https://www.goinri.com'} target={'_blank'}>
+            <Logo width={'60'} height={'60'} />
+          </a>
         </div>
       </div>
 

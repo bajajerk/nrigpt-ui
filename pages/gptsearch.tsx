@@ -1,10 +1,11 @@
 import Image from 'next/image'
 import Gptchat from '../components/gptchat'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import { SparkIcon } from '../images/SparkIcon'
 import { useChatScroll } from '../hooks/scrollhook'
 import { Message } from '../types/message'
+import Logo from '../components/logo'
 
 
 const ChatPage = () => {
@@ -35,12 +36,21 @@ const ChatPage = () => {
         <div>
           <header className='bg-blue-600'>
             <nav
-              className='mx-auto flex  items-center justify-between p-6 lg:px-8'
+              className='mx-auto flex  items-center justify-between p-2 lg:px-8'
               aria-label='Global'
             >
-              <div className='flex lg:flex-1'>
+              <div className='flex lg:flex-1 flex-row justify-between'>
                 <a href={'/'}>
                   <p className={'text-white pl-2 text-lg font-semibold'}>NRI GPT</p>
+                </a>
+              </div>
+
+              <div className='flex flex-row'>
+                <div className={'flex text-white text-md md:text-lg font-light items-center mr-2'}>
+                  Brought to you by
+                </div>
+                <a href={'https://www.goinri.com'} target={'_blank'}>
+                  <Logo width={'60'} height={'60'} />
                 </a>
               </div>
             </nav>

@@ -74,7 +74,7 @@ const GptSearchBanner = () => {
             <input
               type='search'
               id='default-search'
-              className='font-sm md:font-lg block w-full p-2 md:p-4 pl-10 md:pl-8 text-md md:text-lg text-gray-800 border border-gray-300 rounded-lg bg-gray-50 focus:ring-0'
+              className={`w-[320px] md:w-[860px] font-sm md:font-lg block  p-2 md:p-4 pl-10 md:pl-8 text-md md:text-lg text-gray-800 border border-gray-300 rounded-lg bg-gray-50 focus:ring-0`}
               placeholder='Search for your queries'
               value={searchQuery}
               onKeyPress={(e) => {

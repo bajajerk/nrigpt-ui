@@ -20,7 +20,8 @@ interface Props {
 export default function Gptchat({ message, messages: messagesDb, setMessages }: Props) {
   const [aiResponse, setAiResponse] = useState('')
   const [isStreamComplete, setIsStreamComplete] = useState(false)
-
+  const [pageLinks, setPageLinks] = useState<any[]>([])
+  const [pageReference, setPageReference] = useState(null)
   const [gptLoading, setGptLoading] = useState(false)
 
   const router = useRouter();
@@ -28,18 +29,22 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
   useEffect(() => {
     if (message.queryString) {
       fetchDataCallBAck()
-      // fetchAIPageReference()
+      fetchAIPageReference()
     }
   }, [message.queryString])
   //
-  // const fetchAIPageReference = async () => {
-  //   setPageReference(null)
-  //   const { data } = await axios.post('https://www.goinri.com/api/get-blog-page', {
-  //     query: queryString
-  //   })
-  //   setPageReference(data?.pageLink)
-  //   setPageLinks(data?.allPageLinksFound || [])
-  // }
+  const fetchAIPageReference = async () => {
+    const response2 = await fetch('https://staging.goinri.com/api/get-blog-page', {
+      method: 'POST',
+      body: JSON.stringify({ query: message.queryString}),
+    })
+    // console.log(response2.json())
+    const data = await response2.json();
+
+    setPageReference(data?.pageLink)
+    // setPageLinks(data?.allPageLinksFound || [])
+    // setPageLinks(data?.allPageLinksFound || [])
+  }
 
   const fetchDataCallBAck = async () => {
     setGptLoading(true)
@@ -123,12 +128,26 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
                  // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                  alt="" />
           }
-          <div className="min-w-0 flex  items-center">
+          <div className={'flex flex-col'}>
+          <div className="min-w-0 flex items-center">
             <p className="text-base leading-7 text-gray-600">
               {aiResponse === '' ? 'Thinking...' : aiResponse}
             </p>
           </div>
-        </div>
+
+            {pageReference && !gptLoading &&
+              <div className="mt-2 flex">
+                <a
+                  href={`https://goinri.com/${pageReference}`} target={'_blank'}
+                  className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Read more
+                </a>
+              </div>
+            }
+          </div>
+          </div>
+
 
 
       </li>

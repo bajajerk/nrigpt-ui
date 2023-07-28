@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import axios from 'axios'
 import {useRouter} from "next/router";
 import teaserGif from '../images/teaser.gif'
@@ -11,6 +11,7 @@ import  Inri  from '../images/inri.png';
 import { Message } from '../types/message'
 import { isBrowser } from 'react-device-detect';
 import Mixpanel from 'mixpanel-browser'
+import Link from 'next/link';
 
 interface Props {
   message: Message;
@@ -121,12 +122,10 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
 
         <div className="flex gap-x-4 pr-6 w-full py-4 items-center md:justify-center px-16">
           {isBrowser &&
-            <Image className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                 src={Inri}
-                   height={48}
-                   width={48}
-                 // src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                 alt="" />
+            <img
+              src='https://ypejcglyqkzysgycxsug.supabase.co/storage/v1/object/public/website-assets/inri.png'
+              className='w-12 h-12'
+            />
           }
           <div className={'flex flex-col'}>
           <div className="min-w-0 flex items-center">
@@ -136,14 +135,22 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
           </div>
 
             {pageReference && !gptLoading &&
-              <div className="mt-2 flex">
-                <a
-                  href={`https://goinri.com/${pageReference}`} target={'_blank'}
-                  className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              <div className={'mt-6 flex justify-center underline text-blue-600 text-sm font-medium'}>
+                <Link  href={`https://goinri.com/${pageReference}`} passHref
                 >
+                  <a target='_blank'>
                   Read more
-                </a>
+                  </a>
+                </Link>
               </div>
+              // <div className="mt-2 flex">
+              //   <a
+              //     href={`https://goinri.com/${pageReference}`} target={'_blank'}
+              //     className="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              //   >
+              //     Read more
+              //   </a>
+              // </div>
             }
           </div>
           </div>

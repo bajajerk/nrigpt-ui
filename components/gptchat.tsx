@@ -1,12 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react'
-import axios from 'axios'
 import {useRouter} from "next/router";
-import teaserGif from '../images/teaser.gif'
 import Image from 'next/image'
-import { PageMeta } from '../utils/types'
-import  GPTIcon  from '../images/chatgpt-icon.svg';
 import  Avatar  from '../images/avatar.png';
-import  Inri  from '../images/inri.png';
 
 import { Message } from '../types/message'
 import { isBrowser } from 'react-device-detect';
@@ -107,7 +102,7 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
   // @ts-ignore
   return (
       <li key={message.queryString} className="relative flex  flex-col ">
-        <div className="flex gap-x-4 w-full bg-gray-50 py-4 items-center md:justify-center px-16">
+        <div className="flex gap-x-4 w-full bg-gray-50 py-4 items-center  px-4 md:px-32">
           <Image className="h-12 w-12 flex-none rounded-full bg-gray-50"
                  height={48}
                  width={48}
@@ -120,15 +115,13 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
           </div>
         </div>
 
-        <div className="flex gap-x-4 pr-6 w-full py-4 items-center md:justify-center px-16">
-          {isBrowser &&
+        <div className="flex gap-x-4 pr-6 w-full py-4 md:justify-center px-4 md:px-32">
             <img
               src='https://ypejcglyqkzysgycxsug.supabase.co/storage/v1/object/public/website-assets/inri.png'
               className='w-12 h-12'
             />
-          }
           <div className={'flex flex-col'}>
-          <div className="min-w-0 flex items-center">
+          <div className="min-w-0 flex">
             <p className="text-base leading-7 text-gray-600">
               {aiResponse === '' ? 'Thinking...' : aiResponse}
             </p>

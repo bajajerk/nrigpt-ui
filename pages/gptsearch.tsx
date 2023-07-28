@@ -6,11 +6,20 @@ import { SparkIcon } from '../images/SparkIcon'
 import { useChatScroll } from '../hooks/scrollhook'
 import { Message } from '../types/message'
 import Logo from '../components/logo'
+import FeedbackModal from '../components/FeedbackModal'
 
 
 const ChatPage = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [message, setMessage] = useState('')
+  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false)
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null)
+
+
+  const onClickFeedbackButton = (message: Message) => {
+    setSelectedMessage(message)
+    setIsFeedbackModalOpen(true)
+  }
 
   const messagesRef = useChatScroll(messages)
 
@@ -63,7 +72,8 @@ const ChatPage = () => {
             className='divide-y divide-gray-100 flex justify-start flex-col'
           >
             {messages.map((message, i) => (
-              <Gptchat key={i} message={message} messages={messages} setMessages={setMessages} />
+              <Gptchat key={i} message={message} messages={messages} setMessages={setMessages}
+                       onClickFeedbackButton={onClickFeedbackButton} />
             ))}
           </ul>
           {/*<div ref={dummyRef} />*/}
@@ -91,13 +101,6 @@ const ChatPage = () => {
                   e.preventDefault()
                   setMessages([...messages, { queryString: message, answer: '', id: Math.random().toString() }])
                   setMessage('')
-                  //make dummy ref scroll into view
-                  // @ts-ignore
-                  // dummyRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
-                  //make list ref scroll into view
-
-                  // @ts-ignore
-                  // listRef.current.scrollIntoView({ behavior: 'smooth', block: 'end' })
                 }
               }}
               className='w-full focus:outline-none focus:placeholder-white text-gray-600 placeholder-gray-600 pl-12 bg-white rounded-md py-3'
@@ -128,6 +131,10 @@ const ChatPage = () => {
           </div>
         </div>
       </div>
+      {selectedMessage &&
+        <FeedbackModal message={selectedMessage} closeModal={() => setIsFeedbackModalOpen(false)}
+                       isOpen={isFeedbackModalOpen} />
+      }
     </>
   )
 }

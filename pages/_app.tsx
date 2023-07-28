@@ -12,6 +12,7 @@ function MyApp({
   initialSession: Session
 }>) {
 
+
   Mixpanel.init('006ee96e319317290e4d00678575c899')
 
   return (

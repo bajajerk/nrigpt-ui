@@ -2,9 +2,9 @@ import React, { ReactNode, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Avatar from '../images/avatar.png'
+import { HandThumbDownIcon } from '@heroicons/react/24/solid'
 
 import { Message } from '../types/message'
-import { isBrowser } from 'react-device-detect'
 import Mixpanel from 'mixpanel-browser'
 import Link from 'next/link'
 
@@ -12,12 +12,12 @@ interface Props {
   message: Message;
   messages: Message[]
   setMessages: (messages: Message[]) => void
+  onClickFeedbackButton: (message: Message) => void
 }
 
-export default function Gptchat({ message, messages: messagesDb, setMessages }: Props) {
+export default function Gptchat({ message, messages: messagesDb, setMessages, onClickFeedbackButton }: Props) {
   const [aiResponse, setAiResponse] = useState('')
   const [isStreamComplete, setIsStreamComplete] = useState(false)
-  const [pageLinks, setPageLinks] = useState<any[]>([])
   const [pageReference, setPageReference] = useState(null)
   const [gptLoading, setGptLoading] = useState(false)
 
@@ -82,6 +82,7 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
                   return {
                     ..._,
                     response: resultString,
+                    answer: resultString,
                   }
                 }
                 return _
@@ -118,7 +119,7 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
 
 
       {/*This is answer section*/}
-      <div className='flex gap-x-4 pr-6 w-full py-4 md:justify-center px-4 md:px-32'>
+      <div className='flex gap-x-4 pr-6 w-full py-4 px-4 md:px-32'>
         <div className={'flex flex-col'}>
 
           <div className={'flex flex-row gap-x-4'}>
@@ -135,7 +136,7 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
             </div>
           </div>
 
-          {!gptLoading && aiResponse!=='' && (
+          {!gptLoading && aiResponse !== '' && (
             <div className={'pt-4 flex flex-row justify-between ml-14'}>
               {pageReference && !gptLoading &&
                 <div className={'flex justify-center underline text-blue-600 text-sm font-medium'}>
@@ -147,8 +148,9 @@ export default function Gptchat({ message, messages: messagesDb, setMessages }: 
                   </Link>
                 </div>
               }
-              {/*<p> bottom section</p>*/}
-
+              <div onClick={() => onClickFeedbackButton(message)}>
+                <HandThumbDownIcon height={18} width={28}/>
+              </div>
             </div>
           )}
         </div>

@@ -35,7 +35,7 @@ const GptSearchBanner = () => {
       <div className=' mt-8 md:mt-20 flex flex-col items-center'>
         <h1 className='text-white text-3xl md:text-5xl font-bold'>NRI GPT</h1>
         <div className='mt-3 mb-4 lg:mt-6 lg:mb-8 flex flex-row'>
-          <div className={'flex text-white text-md md:text-lg font-light items-center mr-2'}>
+          <div className={'flex text-white text-md md:text-md font-light items-center mr-2'}>
             Brought to you by
           </div>
           <a href={'https://www.goinri.com'} target={'_blank'}>

@@ -149,7 +149,7 @@ export default function Gptchat({ message, messages: messagesDb, setMessages, on
                 </div>
               }
               <div onClick={() => onClickFeedbackButton(message)}>
-                <HandThumbDownIcon height={18} width={28}/>
+                <HandThumbDownIcon height={18} width={28} className={'fill-blue-600'}/>
               </div>
             </div>
           )}

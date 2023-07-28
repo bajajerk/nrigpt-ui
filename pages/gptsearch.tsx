@@ -55,7 +55,7 @@ const ChatPage = () => {
               </div>
 
               <div className='flex flex-row'>
-                <div className={'flex text-white text-md md:text-lg font-light items-center mr-2'}>
+                <div className={'flex text-white text-sm font-light items-center mr-2'}>
                   Brought to you by
                 </div>
                 <a href={'https://www.goinri.com'} target={'_blank'}>
@@ -88,7 +88,7 @@ const ChatPage = () => {
                 type='button'
                 className='inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none'
               >
-                <SparkIcon id={undefined} color={undefined} />
+                <SparkIcon id={undefined} color={'blue-600'} />
               </button>
             </span>
             <input
